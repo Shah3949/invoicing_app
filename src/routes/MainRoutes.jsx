@@ -3,6 +3,7 @@ import React, { lazy } from 'react';
 // project import
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'component/Loadable';
+import InvoiceApp from 'views/invoice/InvoiceApp';
 
 const DashboardDefault = Loadable(lazy(() => import('views/Dashboard/Default')));
 const UtilsTypography = Loadable(lazy(() => import('views/Utils/Typography')));
@@ -23,7 +24,8 @@ const MainRoutes = {
       element: <DashboardDefault />
     },
     { path: '/utils/util-typography', element: <UtilsTypography /> },
-    { path: '/sample-page', element: <SamplePage /> }
+    { path: '/sample-page', element: <SamplePage /> },
+    { path: '/dashboard/create-new-invoice', element: <InvoiceApp /> }
   ]
 };
 
