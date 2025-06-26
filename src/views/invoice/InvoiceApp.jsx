@@ -297,6 +297,48 @@ export default function InvoiceApp() {
                                     </div>
                                 </div>
                             </div>
+                            {/* customer detail */}
+                            {invoiceData.billTo.name && (
+                                <div className="mt-6 bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                        <h3 className="text-lg font-semibold text-gray-900">Bill To</h3>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                        <div className="space-y-3">
+                                            <div>
+                                                <span className="text-gray-500 font-medium">Customer Name</span>
+                                                <p className="text-gray-900 mt-1">{invoiceData.billTo.name}</p>
+                                            </div>
+
+                                            <div>
+                                                <span className="text-gray-500 font-medium">Phone</span>
+                                                <p className="text-gray-900 mt-1">{invoiceData.billTo.phone}</p>
+                                            </div>
+
+                                            <div>
+                                                <span className="text-gray-500 font-medium">GSTIN</span>
+                                                <p className="text-gray-900 mt-1 font-mono text-xs bg-gray-50 px-2 py-1 rounded">
+                                                    {invoiceData.billTo.gstin}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <div>
+                                                <span className="text-gray-500 font-medium">Address</span>
+                                                <div className="text-gray-900 mt-1 leading-relaxed">
+                                                    <p>{invoiceData.billTo.address}</p>
+                                                    <p>{invoiceData.billTo.city}</p>
+                                                    <p>{invoiceData.billTo.country}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                         </div>
 
                         {/* Bill To Popup */}
@@ -311,6 +353,8 @@ export default function InvoiceApp() {
                                 </div>
                             </div>
                         )}
+
+
 
                         {/* Description Section */}
                         <div className="mb-10">
