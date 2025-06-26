@@ -1,8 +1,27 @@
 import React from 'react';
 import { Edit2, X } from 'lucide-react';
+import PropTypes from 'prop-types';
+
 
 
 const BillToPopUp = ({ invoiceData, handleInputChange, setShowBillToPopup }) => {
+    BillToPopUp.propTypes = {
+        invoiceData: PropTypes.shape({
+            billTo: PropTypes.shape({
+                name: PropTypes.string,
+                phone: PropTypes.number,
+                address: PropTypes.string,
+                city: PropTypes.string,
+                country: PropTypes.string,
+                gstin: PropTypes.string,
+            }).isRequired
+        }).isRequired,
+
+        handleInputChange: PropTypes.func.isRequired,
+        setShowBillToPopup: PropTypes.func.isRequired
+    };
+
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative border border-gray-100 overflow-hidden">

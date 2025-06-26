@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import BillToPopUp from '../../component/invoiceComponents/BillToPopUp';
 import ProductPopUp from '../../component/invoiceComponents/ProductPopUp';
 import InvoiceLogoUpload from '../../component/invoiceComponents/InvoiceLogoUpload';
-import { Edit2, Plus, Trash2, Upload, Save, FileText, Download, Calculator, CreditCard, User, Package } from 'lucide-react';
+import { Edit2, Plus, Trash2, Upload, Save, FileText, Download, CreditCard, User, Package } from 'lucide-react';
 
 
 
@@ -38,6 +38,8 @@ export default function InvoiceApp() {
         description: '',
         quantity: "",
         rate: "",
+        discount: "",
+        taxRate: "",
         amount: ""
     });
 
@@ -79,11 +81,21 @@ export default function InvoiceApp() {
 
     // Update product amount when quantity or rate changes
     useEffect(() => {
+        const qty = parseFloat(newProduct.quantity) || 0;
+        const rate = parseFloat(newProduct.rate) || 0;
+        const discount = parseFloat(newProduct.discount) || 0;
+        const taxRate = parseFloat(newProduct.taxRate) || 0;
+
+        const base = qty * rate;
+        const afterDiscount = base - discount;
+        const taxAmount = (afterDiscount * taxRate) / 100;
+
         setNewProduct(prev => ({
             ...prev,
-            amount: prev.quantity * prev.rate
+            amount: afterDiscount + taxAmount
         }));
-    }, [newProduct.quantity, newProduct.rate]);
+    }, [newProduct.quantity, newProduct.rate, newProduct.discount, newProduct.taxRate]);
+
 
     const handleInputChange = (field, value, nested = null) => {
         if (nested) {
@@ -361,9 +373,11 @@ export default function InvoiceApp() {
                                         <table className="w-full">
                                             <thead className="bg-gray-100">
                                                 <tr>
-                                                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Description</th>
+                                                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Product Name</th>
                                                     <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Quantity</th>
                                                     <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Rate</th>
+                                                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Disc(%)</th>
+                                                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">GST(%)</th>
                                                     <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Amount</th>
                                                     <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Actions</th>
                                                 </tr>
@@ -374,6 +388,8 @@ export default function InvoiceApp() {
                                                         <td className="px-6 py-4 text-sm text-gray-900 font-medium">{product.description}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-700 text-center">{product.quantity}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-700 text-center">{product.rate}</td>
+                                                        <td className="px-6 py-4 text-sm text-gray-700 text-center">{product.discount ? product.discount : "0"}</td>
+                                                        <td className="px-6 py-4 text-sm text-gray-700 text-center">{product.taxRate ? product.taxRate : "0"}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-900 text-center font-semibold">{product.amount}</td>
                                                         <td className="px-6 py-4 text-center">
                                                             <button
@@ -392,15 +408,15 @@ export default function InvoiceApp() {
                             )}
                         </div>
 
-                        {/* Tax and Totals */}
+                        {/* Totals */}
                         <div className="mb-10">
-                            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                            {/* <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                                 <Calculator className="w-5 h-5 text-blue-600" />
                                 Tax & Calculations
-                            </h3>
+                            </h3> */}
                             <div className="bg-amber-50 border border-yellow-200 rounded-2xl p-8 shadow-sm">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                    <div className="space-y-2">
+                                    {/* <div className="space-y-2">
                                         <label className="block text-sm font-semibold text-gray-700">Tax Rate (%)</label>
                                         <input
                                             type="number"
@@ -409,7 +425,7 @@ export default function InvoiceApp() {
                                             className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-lg"
                                             placeholder="0"
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                                         <div className="space-y-4">
                                             <div className="flex justify-between items-center py-2">

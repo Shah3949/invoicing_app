@@ -1,7 +1,21 @@
 import React from 'react'
 import { Plus, X } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 const ProductPopUp = ({ setShowProductForm, newProduct, setNewProduct, addProduct }) => {
+    ProductPopUp.propTypes = {
+        setShowProductForm: PropTypes.func.isRequired,
+        addProduct: PropTypes.func.isRequired,
+        setNewProduct: PropTypes.func.isRequired,
+        newProduct: PropTypes.shape({
+            description: PropTypes.string,
+            quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            rate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            discount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            taxRate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        }).isRequired
+    };
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative border border-gray-100 overflow-hidden">
@@ -26,7 +40,7 @@ const ProductPopUp = ({ setShowProductForm, newProduct, setNewProduct, addProduc
                 {/* Form content */}
                 <div className="p-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="space-y-2">
+                        <div className="space-y-2 col-span-2">
                             <label className="block text-sm font-semibold text-gray-800 mb-2">
                                 Product Name
                             </label>
@@ -71,6 +85,42 @@ const ProductPopUp = ({ setShowProductForm, newProduct, setNewProduct, addProduc
                                     setNewProduct((prev) => ({
                                         ...prev,
                                         rate: parseFloat(e.target.value) || '',
+                                    }))
+                                }
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-gray-50 focus:bg-white"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-semibold text-gray-800 mb-2">
+                                Discount(%)
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="0.00"
+                                value={newProduct.discount}
+                                onChange={(e) =>
+                                    setNewProduct((prev) => ({
+                                        ...prev,
+                                        discount: parseFloat(e.target.value) || '',
+                                    }))
+                                }
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-gray-50 focus:bg-white"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-semibold text-gray-800 mb-2">
+                                Tax Rate (%)
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="0.00"
+                                value={newProduct.taxRate}
+                                onChange={(e) =>
+                                    setNewProduct((prev) => ({
+                                        ...prev,
+                                        taxRate: parseFloat(e.target.value) || '',
                                     }))
                                 }
                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-gray-50 focus:bg-white"
