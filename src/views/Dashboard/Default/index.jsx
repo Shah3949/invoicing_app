@@ -69,7 +69,7 @@ const Default = () => {
   ];
 
   return (
-    <Grid container spacing={gridSpacing}>
+    <Grid container spacing={gridSpacing} className='p-10'>
       {cardOptions.map((card, index) => (
         <Grid item lg={3} sm={6} xs={12} key={index}>
           <ReportCard
