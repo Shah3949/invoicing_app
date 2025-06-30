@@ -25,12 +25,13 @@ const Main = styled((props) => <main {...props} />)(({ theme }) => ({
   }
 }));
 
-const OutletDiv = styled((props) => <div {...props} />)(({ theme }) => ({
-  [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(3)
-  },
-  padding: theme.spacing(5)
+const OutletDiv = styled('div')(({ theme }) => ({
+  padding: 0,
+  [`@media (min-width: ${theme.breakpoints.values.md}px)`]: {
+    padding: 0
+  }
 }));
+
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -70,7 +71,7 @@ const MainLayout = () => {
         <Box sx={theme.mixins.toolbar} />
         <OutletDiv>
           <Outlet />
-                <Box sx={{mt:5}} > Distributed by <a href='https://themewagon.com' target='_blank'>ThemeWagon</a></Box>
+          <Box sx={{ mt: 5 }} > Distributed by <a href='https://themewagon.com' target='_blank'>ThemeWagon</a></Box>
 
         </OutletDiv>
       </Main>

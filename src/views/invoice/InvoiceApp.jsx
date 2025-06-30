@@ -45,10 +45,14 @@ export default function InvoiceApp() {
 
     const [showProductForm, setShowProductForm] = useState(false);
     const [savedInvoices, setSavedInvoices] = useState([]);
-    const [prefix, setPrefix] = useState('');
     const [showBillToPopup, setShowBillToPopup] = useState(false);
+    const [isPrefixEnabled, setIsPrefixEnabled] = useState(false);
+    const PREFIX = "INV-";
+
     const invoiceRef = useRef();
 
+    {/* Utility to get today's date in YYYY-MM-DD */ }
+    const getTodayDate = () => new Date().toISOString().split("T")[0];
 
 
     // Invoice number auto generation
@@ -58,12 +62,11 @@ export default function InvoiceApp() {
             const year = date.getFullYear();
             const month = String(date.getMonth() + 1).padStart(2, "0");
             const day = String(date.getDate()).padStart(2, "0");
-            const storedCounter = 1; // Simplified for demo
+            const Time = new Date().toLocaleTimeString();
+            const storedCounter = Time; // You can change this logic later
             const formattedCounter = String(storedCounter).padStart(3, "0");
 
-            const billNumber = prefix
-                ? `${prefix.toUpperCase()}${year}${month}${day}${formattedCounter}`
-                : `${year}${month}${day}${formattedCounter}`;
+            const billNumber = `${isPrefixEnabled ? PREFIX : ''}${year}${month}${day}${formattedCounter}`;
 
             setInvoiceData(prev => ({
                 ...prev,
@@ -72,7 +75,10 @@ export default function InvoiceApp() {
         };
 
         generateInvoiceNumber();
-    }, [prefix]);
+    }, [isPrefixEnabled]);
+
+
+
 
     // Calculate totals
     const subtotal = invoiceData.products.reduce((sum, product) => sum + product.amount, 0);
@@ -142,7 +148,21 @@ export default function InvoiceApp() {
             total
         };
         setSavedInvoices(prev => [...prev, invoice]);
-        alert('Invoice saved successfully!');
+        // alert('Invoice saved successfully!');
+        fetch('http://localhost:3001/api/invoice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...invoiceData,
+                subtotal,
+                taxAmount,
+                total
+            })
+        })
+            .then(res => res.text())
+            .then(msg => alert(msg))
+            .catch(err => console.error('Failed:', err));
+
     };
 
     const generateInvoice = () => {
@@ -176,21 +196,21 @@ export default function InvoiceApp() {
         <div ref={invoiceRef} className="min-h-screen bg-indigo-100 p-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="bg-blue-500 text-white rounded-t-2xl shadow-lg">
-                    <div className="p-8">
+                <div className="bg-white text-black rounded-t-2xl shadow-lg">
+                    <div className="p-3">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
-                                    <FileText className="w-8 h-8" />
+                                    <FileText className="w-5 h-5" />
                                 </div>
-                                <div>
-                                    <h1 className="text-3xl font-bold">Create Invoice</h1>
-                                    <p className="text-blue-100 mt-1">Professional invoice generator</p>
+                                <div className='flex'>
+                                    <h1 className="text-xl font-bold">Create Invoice</h1>
+                                    <p className="text-black mt-1 mx-4">Professional invoice generator</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><hr />
 
                 <div className="bg-white rounded-b-2xl shadow-xl">
                     <div className="p-8">
@@ -208,52 +228,73 @@ export default function InvoiceApp() {
                             {/* Invoice Details */}
                             <div className="lg:col-span-2">
                                 <div className="bg-blue-50 rounded-2xl p-8 shadow-sm">
+                                    {/* Header */}
                                     <div className="flex items-center gap-3 mb-6">
                                         <div className="bg-blue-600 rounded-xl p-2">
                                             <FileText className="w-6 h-6 text-white" />
                                         </div>
                                         <h2 className="text-3xl font-bold text-blue-800">TAX INVOICE</h2>
                                     </div>
+
+                                    {/* Grid Form */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                        {/* Prefix and Invoice No. */}
+                                        <div className="md:col-span-2 flex flex-col md:flex-row md:items-end gap-4">
+                                            <div className="relative -top-4 flex items-center gap-2 mx-7">
+                                                <input
+                                                    type="checkbox"
+                                                    id="prefixToggle"
+                                                    checked={isPrefixEnabled}
+                                                    onChange={(e) => setIsPrefixEnabled(e.target.checked)}
+                                                    className="h-5 w-5 text-blue-600 border-gray-300 rounded"
+                                                />
+                                                <label htmlFor="prefixToggle" className="text-sm font-semibold text-gray-700">
+                                                    Add Prefix
+                                                </label>
+                                            </div>
+
+
+
+                                            <div className="w-full md:w-2/3 space-y-2">
+                                                <label className="block text-sm font-semibold text-gray-700">Invoice No.</label>
+                                                <input
+                                                    type="text"
+                                                    value={invoiceData.invoiceNumber}
+                                                    readOnly
+                                                    className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 font-mono text-lg"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Invoice Date */}
                                         <div className="space-y-2">
                                             <label htmlFor="invoiceDate" className="block text-sm font-semibold text-gray-700">Invoice Date</label>
                                             <input
-                                                id='invoiceDate'
+                                                id="invoiceDate"
                                                 type="date"
+                                                max={getTodayDate()} // restrict to today or earlier
                                                 value={invoiceData.invoiceDate}
                                                 onChange={(e) => handleInputChange('invoiceDate', e.target.value)}
                                                 className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                             />
                                         </div>
-                                        <div className="space-y-2">
-                                            <label className="block text-sm font-semibold text-gray-700">Prefix (optional)</label>
-                                            <input
-                                                type="text"
-                                                placeholder="e.g. AB"
-                                                value={prefix}
-                                                onChange={(e) => setPrefix(e.target.value)}
-                                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label className="block text-sm font-semibold text-gray-700">Invoice No.</label>
-                                            <input
-                                                type="text"
-                                                value={invoiceData.invoiceNumber}
-                                                readOnly
-                                                className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 font-mono text-lg"
-                                            />
-                                        </div>
+
+                                        {/* Due Date */}
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">Due Date</label>
                                             <input
                                                 type="date"
+                                                min={invoiceData.invoiceDate || getTodayDate()} // restrict to today or invoiceDate and later
                                                 value={invoiceData.dueDate}
                                                 onChange={(e) => handleInputChange('dueDate', e.target.value)}
                                                 className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                             />
                                         </div>
-                                        <div className="space-y-2 col-span-1 md:col-span-2">
+
+
+                                        {/* Currency */}
+                                        <div className="space-y-2 md:col-span-2">
                                             <label className="block text-sm font-semibold text-gray-700">Currency</label>
                                             <select
                                                 value={invoiceData.currency}
@@ -266,9 +307,11 @@ export default function InvoiceApp() {
                                                 <option value="GBP">GBP - British Pound</option>
                                             </select>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         {/* Bill To Section */}
