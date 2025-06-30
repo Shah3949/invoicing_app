@@ -52,7 +52,322 @@ const InvoicesPage = () => {
       dueDate: '2025-01-10',
       issueDate: '2024-12-10',
       items: 7
-    }
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-001',
+      client: 'Acme Corporation',
+      amount: 2500.00,
+      status: 'paid',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 3
+    },
+    {
+      id: 'INV-002',
+      client: 'Tech Solutions Ltd',
+      amount: 1850.00,
+      status: 'pending',
+      dueDate: '2025-02-01',
+      issueDate: '2025-01-01',
+      items: 2
+    },
+    {
+      id: 'INV-003',
+      client: 'Digital Marketing Co',
+      amount: 3200.00,
+      status: 'overdue',
+      dueDate: '2024-12-30',
+      issueDate: '2024-11-30',
+      items: 5
+    },
+    {
+      id: 'INV-004',
+      client: 'StartUp Inc',
+      amount: 950.00,
+      status: 'draft',
+      dueDate: '2025-02-15',
+      issueDate: '2025-01-15',
+      items: 1
+    },
+    {
+      id: 'INV-005',
+      client: 'Enterprise Systems',
+      amount: 4750.00,
+      status: 'paid',
+      dueDate: '2025-01-10',
+      issueDate: '2024-12-10',
+      items: 7
+    },
+    {
+      id: 'INV-39',
+      client: 'shahzeb',
+      amount: 3949.00,
+      status: 'pending',
+      dueDate: '2025-01-15',
+      issueDate: '2024-12-15',
+      items: 100
+    },
   ]);
 
   const getStatusColor = (status) => {
@@ -90,26 +405,26 @@ const InvoicesPage = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm border">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
             <h3 className="text-sm font-medium text-gray-500">Total Invoices</h3>
             <p className="text-2xl font-bold text-gray-900">{filteredInvoices.length}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
             <h3 className="text-sm font-medium text-gray-500">Total Amount</h3>
             <p className="text-2xl font-bold text-gray-900">${totalAmount.toLocaleString()}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
             <h3 className="text-sm font-medium text-gray-500">Paid</h3>
             <p className="text-2xl font-bold text-green-600">${paidAmount.toLocaleString()}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
             <h3 className="text-sm font-medium text-gray-500">Pending</h3>
             <p className="text-2xl font-bold text-yellow-600">${pendingAmount.toLocaleString()}</p>
           </div>
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="bg-white p-4 rounded-lg shadow-sm">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -146,7 +461,7 @@ const InvoicesPage = () => {
       </div>
 
       {/* Invoices Table */}
-      <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b">
